@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  fabiinaustralia:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_proxy"
+
+      - "traefik.http.routers.countdownpage.rule=Host(`${URL}`)"
+      - "traefik.http.routers.countdownpage.entrypoints=web"
+      - "traefik.http.routers.countdownpage.middlewares=countdownpage-https-redirect"
+
+      - "traefik.http.routers.countdownpage-secure.rule=Host(`${URL}`)"
+      - "traefik.http.routers.countdownpage-secure.entrypoints=websecure"
+      - "traefik.http.routers.countdownpage-secure.tls=true"
+      - "traefik.http.routers.countdownpage-secure.tls.certresolver=certresolver"
+
+      - "traefik.http.middlewares.countdownpage-https-redirect.redirectscheme.scheme=https"
+    networks:
+      - default
+      - traefik_proxy
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+

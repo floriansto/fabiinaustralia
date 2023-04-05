@@ -21,6 +21,12 @@ docker-compose build --no-cache
 
 ## Start the container
 
+Before you start the container you need to create a `.env` file with the following content:
+```
+URL=url.domain.tld
+```
+where you need to replace `url.domain.tld` with your domain for the webpage.
+
 To start the container execute
 ```sh
 docker-compose up -d
