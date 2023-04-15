@@ -1,5 +1,5 @@
 function countdown() {
-    const endDate = new Date("May 1, 2023 00:00:00").getTime();
+    const endDate = new Date("May 1, 2023 10:30:00").getTime();
     const now = new Date().getTime();
     distance = endDate - now;
     text = "Zeit, bis Fabi nach Australien geht"
